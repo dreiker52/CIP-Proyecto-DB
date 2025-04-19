@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2025-04-18 14:18
+-- Generated: 2025-04-19 18:50
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -31,7 +31,14 @@ CREATE TABLE IF NOT EXISTS `CarRentalX`.`Vehiculos` (
   `tipoVehiculo` VARCHAR(45) NULL DEFAULT NULL,
   `estadoVehiculo` ENUM('disponible', 'reservado', 'alquilado', 'mantenimiento') NULL DEFAULT NULL,
   `precioDiario` DECIMAL(10,2) NULL DEFAULT NULL,
-  PRIMARY KEY (`idVehiculo`))
+  `idSucursal` INT(10) NOT NULL,
+  PRIMARY KEY (`idVehiculo`),
+  INDEX `fk_Vehiculos_Sucursal1_idx` (`idSucursal` ASC),
+  CONSTRAINT `fk_Vehiculos_Sucursal1`
+    FOREIGN KEY (`idSucursal`)
+    REFERENCES `CarRentalX`.`Sucursales` (`idSucursal`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -55,6 +62,34 @@ CREATE TABLE IF NOT EXISTS `CarRentalX`.`Reservas` (
     REFERENCES `CarRentalX`.`Vehiculos` (`idVehiculo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `CarRentalX`.`Empleados` (
+  `idEmpleado` INT(10) NOT NULL,
+  `nombreEmpleado` VARCHAR(45) NULL DEFAULT NULL,
+  `apellidoEmpleado` VARCHAR(45) NULL DEFAULT NULL,
+  `telefonoEmpleado` INT(15) NULL DEFAULT NULL,
+  `emailEmpleado` VARCHAR(45) NULL DEFAULT NULL,
+  `cargoEmpleado` VARCHAR(45) NULL DEFAULT NULL,
+  `idSucursal` INT(10) NOT NULL,
+  PRIMARY KEY (`idEmpleado`),
+  INDEX `fk_Empleados_Sucursal1_idx` (`idSucursal` ASC),
+  CONSTRAINT `fk_Empleados_Sucursal1`
+    FOREIGN KEY (`idSucursal`)
+    REFERENCES `CarRentalX`.`Sucursales` (`idSucursal`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `CarRentalX`.`Sucursales` (
+  `idSucursal` INT(10) NOT NULL,
+  `nombreSucursal` VARCHAR(45) NULL DEFAULT NULL,
+  `direccionSucursal` VARCHAR(45) NULL DEFAULT NULL,
+  `telefonoSucursal` INT(15) NULL DEFAULT NULL,
+  `emailSucursal` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idSucursal`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

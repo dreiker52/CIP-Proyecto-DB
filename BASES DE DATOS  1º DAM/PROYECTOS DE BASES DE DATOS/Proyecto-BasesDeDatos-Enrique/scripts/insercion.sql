@@ -1,17 +1,35 @@
 use carrentalx;
 
+### INSERCIONES DE LAS SUCURSALES
+INSERT INTO Sucursales (idSucursal, nombreSucursal, direccionSucursal, telefonoSucursal, emailSucursal) VALUES
+(1, 'Sucursal Las Palmas', 'Calle Triana 85, Las Palmas de Gran Canaria', '928123456', 'laspalmas@sucursal.com'),
+(2, 'Sucursal Tenerife', 'Avenida La Salle 12, Santa Cruz de Tenerife', '922987654', 'tenerife@sucursal.com'),
+(3, 'Sucursal Lanzarote', 'Calle León y Castillo 34, Arrecife', '928765432', 'lanzarote@sucursal.com');
+
+
+### INSERCIONES DE LOS EMPLEADOS
+INSERT INTO Empleados (idEmpleado, nombreEmpleado, apellidoEmpleado, telefonoEmpleado, emailEmpleado, cargoEmpleado, idSucursal) VALUES
+(1, 'Laura', 'Gómez', '678123456', 'laura.gomez@sucursal.com', 'Gerente', 1),
+(2, 'Carlos', 'Ruiz', '679987654', 'carlos.ruiz@sucursal.com', 'Atención al cliente', 1),
+(3, 'Elena', 'Martínez', '687456123', 'elena.martinez@sucursal.com', 'Gerente', 2),
+(4, 'Jorge', 'López', '688321654', 'jorge.lopez@sucursal.com', 'Mecánico', 2),
+(5, 'Marta', 'Fernández', '697112233', 'marta.fernandez@sucursal.com', 'Gerente', 3),
+(6, 'David', 'Navarro', '698998877', 'david.navarro@sucursal.com', 'Atención al cliente', 3);
+
+
 ### INSERCIONES DE LOS VEHICULOS
-INSERT INTO Vehiculos (idVehiculo, matricula, kilometraje, tipoVehiculo, estadoVehiculo, precioDiario) VALUES
-(1, 'ABC1234', 45200, 'Sedán', 'disponible', 25.99),
-(2, 'XYZ5678', 102300, 'SUV', 'alquilado', 29.50),
-(3, 'DEF9012', 0, 'Compacto', 'reservado', 19.99),
-(4, 'GHI3456', 58900, 'Familiar', 'mantenimiento', 27.00),
-(5, 'JKL7890', 6996, 'Deportivo', 'disponible', 30.00),
-(6, 'MNO2345', 72000, 'Furgoneta', 'disponible', 28.75),
-(7, 'PQR6789', 31000, 'Sedán', 'reservado', 22.50),
-(8, 'STU0123', 8800, 'Compacto', 'disponible', 14.99),
-(9, 'VWX4567', 44500, 'SUV', 'alquilado', 26.25),
-(10, 'YZA8901', 2, 'Furgoneta', 'mantenimiento', 23.90);
+INSERT INTO Vehiculos (idVehiculo, matricula, kilometraje, tipoVehiculo, estadoVehiculo, precioDiario, idSucursal) VALUES
+(1, 'ABC1234', 45200, 'Sedán', 'disponible', 25.99, 1),
+(2, 'XYZ5678', 102300, 'SUV', 'alquilado', 29.50, 1),
+(3, 'DEF9012', 0, 'Compacto', 'reservado', 19.99, 2),
+(4, 'GHI3456', 58900, 'Familiar', 'mantenimiento', 27.00, 2),
+(5, 'JKL7890', 6996, 'Deportivo', 'disponible', 30.00, 3),
+(6, 'MNO2345', 72000, 'Furgoneta', 'disponible', 28.75, 3),
+(7, 'PQR6789', 31000, 'Sedán', 'reservado', 1, 1),
+(8, 'STU0123', 8800, 'Compacto', 'disponible', 14.99, 2),
+(9, 'VWX4567', 44500, 'SUV', 'alquilado', 26.25, 3),
+(10, 'YZA8901', 2, 'Furgoneta', 'mantenimiento', 23.90, 1);
+
 
 
 ### INSERCIONES DE LOS CLIENTES

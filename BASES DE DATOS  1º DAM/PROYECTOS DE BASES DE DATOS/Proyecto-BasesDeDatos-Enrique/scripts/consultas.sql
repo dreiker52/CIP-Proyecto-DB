@@ -1,11 +1,21 @@
 ### CONSULTA SIMPLE DE LAS DIFERENTES TABLAS
+USE carrentalx;
+
+SELECT * FROM sucursales;
+SELECT * FROM empleados;
 SELECT * FROM vehiculos;
 SELECT * FROM clientes;
 SELECT * FROM reservas;
 
 ### CONSULTAS CON FILTROS 
-### Seleccionar clientes cuyo nombre empiece con 'S'
-SELECT idCliente, nombreCliente AS "CLIENTE" FROM clientes WHERE nombreCliente LIKE 'S%';
+### Seleccionar la información de un cliente con un nombre concreto
+SELECT * FROM clientes WHERE nombreCliente = "Alice";
+
+### Seleccionar las sucursales cuyo telefono empiece con 922
+SELECT idSucursal, nombreSucursal, telefonoSucursal FROM sucursales WHERE telefonoSucursal LIKE '922%';
+
+### Seleccionar empleados cuyo nombre contenga una 'l'
+SELECT idEmpleado, nombreEmpleado AS "EMPLEADO" FROM empleados WHERE nombreEmpleado LIKE '%l%';
 
 ### Seleccionar las reservas que han finalizado
 SELECT idReserva, estadoReserva AS "ESTADO RESERVA" FROM reservas WHERE estadoReserva="finalizada";
@@ -15,6 +25,12 @@ SELECT idVehiculo, kilometraje FROM vehiculos WHERE kilometraje BETWEEN 0 AND 50
 
 
 ### CONSULTAS CON FUNCIONES
+### Calcular el costo diario de todos los vehiculos del sistema
+SELECT SUM(precioDiario) AS TOTAL_DIARIO FROM vehiculos;
+
+### Contar el número total de empleados que tenemos
+SELECT COUNT(idEmpleado) AS TOTAL_EMPLEADOS FROM empleados;
+
 ### Calcular el número total de clientes que se han registrado con pasaporte
 SELECT COUNT(tipoIdentificadorCliente) AS EXTRANJEROS FROM clientes WHERE tipoIdentificadorCliente = "pasaporte";
 
@@ -47,4 +63,27 @@ SELECT r.idReserva, v.idVehiculo, v.precioDiario,
 FROM reservas r
 INNER JOIN vehiculos v ON r.idVehiculo = v.idVehiculo
 WHERE r.idReserva = 1;
+
+
+### CONSULTAS CON UPDATE
+### Cambiar el tamaño admitido para los telefonos de los clientes a INT(20)
+ALTER TABLE Clientes MODIFY COLUMN telefonoCliente INT(20);
+
+### Cambiar el tipo de Vehiculo a uno más interesante
+UPDATE Vehiculos SET tipoVehiculo = 'Máquina del Tiempo'
+WHERE idVehiculo = 2;
+
+SELECT * FROM vehiculos;
+
+### Queremos añadir una nueva columna a las reservas ya que nos llegan clientes muy adinerados
+ALTER TABLE reservas ADD COLUMN prioridad ENUM('Con Prioridad', 'Sin Prioridad') DEFAULT 'Sin Prioridad';
+SELECT * FROM reservas;
+
+ALTER TABLE reservas DROP COLUMN prioridad;
+
+### Queremos añadir una nueva columna a los empleados para ver su salario anual
+ALTER TABLE empleados ADD COLUMN salario DECIMAL(10,2) DEFAULT 0.99;
+SELECT * FROM empleados;
+
+ALTER TABLE empleados DROP COLUMN salario;
 
